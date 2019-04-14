@@ -5,4 +5,4 @@ Instrucciones varias para manejo de sistemas
 
 ### [Java3d](Java3d.md)
 
-### [Linux](Linux.md)
+### [Ubuntu](Ubuntu.md)
