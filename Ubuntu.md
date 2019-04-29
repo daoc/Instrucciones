@@ -1,6 +1,8 @@
 # Linux
 
-## reducir el tamaño de una partición lógica en LVM
+Estas instrucciones funcionan para Ubuntu 16.04
+
+## Reducir el tamaño de una partición lógica en LVM
 
 Ref: https://askubuntu.com/questions/124465/how-do-i-shrink-the-root-logical-volume-lv-on-lvm
 
@@ -13,7 +15,7 @@ Arrancar con un USB que tenga Ubuntu
 `$ sudo lvreduce --resizefs --size -8G /dev/ubuntu-vg/root`
 
 
-## aumentar el tamaño del swap en lvm
+## Aumentar el tamaño del swap en lvm
 
 Ref: https://askubuntu.com/questions/226520/how-can-i-modify-the-size-of-swap-with-lvm-partitions
 
@@ -26,3 +28,16 @@ Ref: https://askubuntu.com/questions/226520/how-can-i-modify-the-size-of-swap-wi
 `$ sudo mkswap /dev/ubuntu-vg/swap_1`
 
 `$ sudo swapon /dev/ubuntu-vg/swap_1`
+
+## Crear Hotspot con WiFi
+
+Ref: https://unix.stackexchange.com/a/384513
+
+`nmcli dev wifi hotspot ifname wlp9s0 ssid griinf_iot password "test1234"`
+
+La conexión se crea con el nombre Hotspot. Para editarla, el archivo se encuentra en `/etc/NetworkManger/system-connections/Hotspot`. Especialmente puede ser necesario incluir el dns local:
+
+`[ipv4]
+dns=10.42.0.1;8.8.8.8;8.8.4.4;`
+
+
