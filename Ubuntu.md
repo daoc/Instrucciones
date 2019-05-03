@@ -51,3 +51,12 @@ Ref: https://makandracards.com/operations/42688-how-to-remove-cloud-init-from-ub
 `sudo rm -rf /etc/cloud/; sudo rm -rf /var/lib/cloud/`
 
 `sudo reboot`
+
+## Instalar mDNS (avahi)
+
+`sudo apt install avahi-daemon`
+
+Habilitar en arranque automàtico:
+
+`sudo systemctl enable avahi-daemon`
+
