@@ -33,11 +33,21 @@ Ref: https://askubuntu.com/questions/226520/how-can-i-modify-the-size-of-swap-wi
 
 Ref: https://unix.stackexchange.com/a/384513
 
-`nmcli dev wifi hotspot ifname wlp9s0 con-name Hotspot ssid griinf_iot password "test1234" ipv4.dns "10.42.0.1;8.8.8.8;8.8.4.4;"`
+`nmcli dev wifi hotspot ifname wlp9s0 con-name Hotspot ssid griinf_iot password "test1234"`
 
 La conexión se crea con el nombre Hotspot. Para editarla, el archivo se encuentra en `/etc/NetworkManger/system-connections/Hotspot`. Especialmente puede ser necesario incluir el dns local:
 
 `[ipv4]
 dns=10.42.0.1;8.8.8.8;8.8.4.4;`
 
+## Remover cloud-init (demoras en arranque)
 
+Ref: https://makandracards.com/operations/42688-how-to-remove-cloud-init-from-ubuntu
+
+`echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg`
+
+`sudo apt purge cloud-init`
+
+`sudo rm -rf /etc/cloud/; sudo rm -rf /var/lib/cloud/`
+
+`sudo reboot`
