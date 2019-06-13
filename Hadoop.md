@@ -27,3 +27,20 @@ Adicionalmente es necesario, al correr en local filesystem, para que no se cuelg
     </description>
 </property>
 ```
+# OpenTSDB
+
+Instalar: [http://opentsdb.net/docs/build/html/installation.html]
+
+o en el archivo: OpenTsdbInstall.pdf
+
+Con el paquete .deb funcionó bien: [https://github.com/OpenTSDB/opentsdb/releases/download/v2.4.0/opentsdb-2.4.0_all.deb]
+
+Para la creación inicial de tablas la instrucción exacta fue:
+`cd /usr/share/opentsdb/tools`
+`env COMPRESSION=NONE HBASE_HOME=/mnt/Secundario/hbase ./create_table.sh`
+
+Información adicional de conffiguración en: [http://opentsdb.net/docs/build/html/user_guide/configuration.html]
+
+Arrancar con: `service opentsdb start`
+
+Detener con: `service opentsdb stop`
