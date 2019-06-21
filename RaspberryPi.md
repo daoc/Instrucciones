@@ -12,6 +12,7 @@ Con lo indicado anteriormente ya tenemos el DNS con dnsmasq (no hace falta BIND)
 Para activar correctamente la resolución del DNS es necesario crear el archivo `/etc/resolv.conf.head` y añadir: `nameserver 127.0.0.1`
 
 # Pantalla Kuman 3.5
+[https://trickiknow.com/raspberry-pi-3-complete-tutorial-2018-lets-get-started/]
 
 Instalar y activar la TFT 3.5: 
 
