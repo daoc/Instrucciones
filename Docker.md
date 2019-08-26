@@ -44,6 +44,8 @@ Tal vez sea necesario: `sudo systemctl daemon-reload`
 
 # Cluster con Docker (Swarm)
 
+(Ref: https://www.dataquest.io/blog/install-and-configure-docker-swarm-on-ubuntu/)
+
 Todos los equipos, físicos o virtuales, deben tener instalado Docker.
 
 Asegurarse que, si está activo el firewall (en Ubuntu es ufw) estén abiertos los puertos respectivos:
