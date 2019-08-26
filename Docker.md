@@ -41,3 +41,26 @@ Volver a arrancar docker:
 > `sudo service docker start`
 
 Tal vez sea necesario: `sudo systemctl daemon-reload`
+
+# Cluster con Docker (Swarm)
+
+Todos los equipos, físicos o virtuales, deben tener instalado Docker.
+
+Asegurarse que, si está activo el firewall (en Ubuntu es ufw) estén abiertos los puertos respectivos:
+
+```
+sudo ufw allow 2376/tcp && sudo ufw allow 7946/udp && sudo ufw allow 7946/tcp && sudo ufw allow 2377/tcp && sudo ufw allow 4789/udp
+
+sudo ufw reload && sudo ufw enable
+
+sudo service docker restart
+```
+En el Manager: 
+
+> `docker swarm init`
+
+Copiar la instrucción que aparece con el token y ejecutarla en cada uno de los Workers:
+
+Ej: > `docker swarm join --token SWMTKN-1-089drgj3qeoaosqzheti6wwnh7zdkzu3qxo7yhc5z6o2uf2b89-6zpu1zyurzilaq3tok3lwxc73 192.168.0.176:2377`
+
+A partir de ahora todas las instrucciones se ejecutan en el Manager
