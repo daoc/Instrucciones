@@ -28,3 +28,16 @@ Registrar todos los cambios en el repositorio remoto
 **Generalmente:**
 
 `git push origin master`
+
+### Tags
+Una tag identifica un commit específico. Para crear una tag sobre el último commit:
+
+`git tag -a v1.0.0 -m "Mensaje explicatorio para la tag v1.0.0"`
+
+Las tags deben ser cargadas o publicadas al repositorio de manera independiente, así que cuando hayamos creado nuevas tags es    necesario ejecutar:
+
+`git push --tags`
+
+Para listar las tags que tenemos junto con sus mensajes, utilizar:
+
+`git tag -n`
