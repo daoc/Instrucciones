@@ -88,3 +88,17 @@ b@B's password:
 From now on you can log into B as b from A as a without password:
 
 a@A:~> `ssh b@B`
+
+## Ejecutar comandos sudo sin poner password
+
+Modificar las opciones de sudo en /etc/sudoers:
+
+`sudo visudo` (Sí, con esto se modifica el archivo sudoers!!!)
+
+Ir a la última línea (Sí, tiene que ir al final del archivo) e incluir:
+```
+<username> ALL=(ALL:ALL) NOPASSWD: ALL
+Defaults:<username>	!requiretty
+```
+(NOTA: La segunda línea resulta útil al conectarse en remoto)
+
