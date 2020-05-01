@@ -97,8 +97,30 @@ Modificar las opciones de sudo en /etc/sudoers:
 
 Ir a la última línea (Sí, tiene que ir al final del archivo) e incluir:
 ```
-<username> ALL=(ALL:ALL) NOPASSWD: ALL
+<username> ALL=(ALL) NOPASSWD: ALL
 Defaults:<username>	!requiretty
 ```
-(NOTA: La segunda línea resulta útil al conectarse en remoto)
+(NOTAS: La segunda línea resulta útil al conectarse en remoto y en lugar de <username> poner su nombre de usuario)
 
+## Ejecutar comandos en remoto y en paralelo con dsh
+
+Es casi imprescindible que todos los equipos del cluster se hayan configurando para ssh y sudo sin password (ver los dos puntos anteriores) y si quiere usar nombres de máquinas en lugar de IPs avahi-daemon es necesario.
+
+Instalar dsh:
+
+`sudo apt install dsh`
+
+Modificar en el archivo de configuración de dsh "/usr/local/etc/dsh.conf" (puede estar en otro directorio!)
+```
+remoteshell =ssh  
+showmachinenames = 1
+```
+Incluir los nombres de todas las máquinas en el archivo de dsh ~/.dsh/machines.list (puede estar en otro directorio), ej:
+```
+rpi0.local
+rpi1.local
+rpi2.local
+```
+Ejecutar los comandos, por ejemplo el comando uptime; la 'a' indica que se lo hará en todas las máquinas de machines.list y la 'c' que será en paralelo:
+
+`dsh -ac "uptime"`
