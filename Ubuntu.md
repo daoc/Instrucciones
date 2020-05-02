@@ -100,7 +100,7 @@ Ir a la última línea (Sí, tiene que ir al final del archivo) e incluir:
 <username> ALL=(ALL) NOPASSWD: ALL
 Defaults:<username>	!requiretty
 ```
-(NOTAS: La segunda línea resulta útil al conectarse en remoto y en lugar de <username> poner su nombre de usuario)
+(NOTAS: La segunda línea resulta útil al conectarse en remoto y en lugar de `<username>` poner su nombre de usuario)
 
 ## Ejecutar comandos en remoto y en paralelo con dsh
 
