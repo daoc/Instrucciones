@@ -20,3 +20,10 @@ sudo shutdown -h now
 ```
 
 Now the base-machine can safely be cloned, and each new machine will generate its own unique machine-id on first boot.
+
+# Con Multipass no se genera una red interna (Win 10 Home)
+
+Es necesario crear a mano la interfaz Host-only (o bridged). En el link las isntrucciones, pero es mucho más complejo de lo que debería:
+https://jon.sprig.gs/blog/post/1574
+
+En Ubuntu, sin embargo, todo funciona bien automáticamente. Parece que el problema es solo cuando hay que usar VirtualBox.
