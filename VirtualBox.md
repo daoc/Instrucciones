@@ -95,4 +95,5 @@ network:
 
 -- grabe y cierre con: Ctrl+O y luego Ctrl+X
 - sudo netplan apply
+
 -- y debería estar listo !
