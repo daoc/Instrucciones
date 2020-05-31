@@ -27,3 +27,72 @@ Es necesario crear a mano la interfaz Host-only (o bridged). En el link las isnt
 https://jon.sprig.gs/blog/post/1574
 
 En Ubuntu, sin embargo, todo funciona bien automáticamente. Parece que el problema es solo cuando hay que usar VirtualBox.
+
+### Crear nueva VM Multipass:
+
+Supongamos que el nombre va a ser: mp3
+
+- multipass launch -n mp3
+- multipass shell mp3
+- sudo apt update
+- sudo apt upgrade
+- sudo apt install avahi-daemon
+- sudo apt install default-jdk
+- curl -fsSL https://get.docker.com -o get-docker.sh
+- sh get-docker.sh
+- sudo usermod -aG docker ubuntu
+
+-- salga y detenga la VM
+- exit
+- multipass stop mp3
+
+
+-- Modificar la interfaz para poder trabajar entre todas las máquinas y el Host
+
+-- Anotar el path al VBoxManage.exe entre comillas
+- "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"
+
+-- Abrir terminal como Administrador
+- Ir a Start, buscar el Terminal, darle click derecho, ir a More y dar click en Run as Administrator
+
+-- ubicar el directorio donde tengan el PsExec64
+- cd C:\Users\ordon\Tools\PSTools
+
+-- buscar el nombre de la red, de preferencia: "VirtualBox Host-Only Ethernet Adapter" (en todo caso la misma para todas)
+- PsExec64.exe -s "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" list hostonlyifs
+
+-- modificar la VM para asignarle esta red
+- PsExec64.exe -s "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" modifyvm mp3 --nic2 hostonly --hostonlyadapter2 "VirtualBox Host-Only Ethernet Adapter"
+
+-- Modificar el archivo de las interfaces en la máquina virtual para registrar el cambio
+- multipass start mp3
+- multipass shell mp3
+- cd /etc/netplan
+
+-- abra para edición el archivo que está ahí. Haga un ls para saber el nombre, generalmente: 50-cloud-init.yaml
+- sudo nano 50-cloud-init.yaml
+
+-- hay que aumentar:
+```
+        enp0s8:
+            dhcp4: true
+```
+
+-- El archivo debe quedar así:
+```
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: true
+            match:
+                macaddress: 08:00:27:e0:fb:a2
+            set-name: enp0s3
+        enp0s8:
+            dhcp4: true
+    version: 2
+```
+-- No use tabs, solo espacios !
+
+-- grabe y cierre con: Ctrl+O y luego Ctrl+X
+- sudo netplan apply
+-- y debería estar listo !
