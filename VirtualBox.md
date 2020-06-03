@@ -23,12 +23,21 @@ Now the base-machine can safely be cloned, and each new machine will generate it
 
 # Con Multipass no se genera una red interna (Win 10 Home)
 
-Es necesario crear a mano la interfaz Host-only (o bridged). En el link las isntrucciones, pero es mucho más complejo de lo que debería:
-https://jon.sprig.gs/blog/post/1574
+En Ubuntu todo funciona bien automáticamente. Parece que el problema es solo cuando hay que usar VirtualBox, lo cual es necesario en Win 10 Home.
 
-En Ubuntu, sin embargo, todo funciona bien automáticamente. Parece que el problema es solo cuando hay que usar VirtualBox.
+Para resolver es necesario crear a mano la interfaz Host-only (o bridged). En el link las instrucciones de base: https://jon.sprig.gs/blog/post/1574
+
+(NOTA: no es una solución muy fácil de ejecutar que se diga pero funciona bien)
+
+Es necesario descargarse primero el programa PsExec64.exe de esta página: https://docs.microsoft.com/en-us/sysinternals/downloads/psexec 
+
+Este es el link directo al zip: https://download.sysinternals.com/files/PSTools.zip
+
+Hay que descomprimir en algún directorio, por ejemplo: C:\Users\ordon\Tools\PSTools
 
 ### Crear nueva VM Multipass:
+
+NOTA: estamos cargando en la nueva VM, docker y el jdk. Esto es optativo, claro.
 
 Supongamos que el nombre va a ser: mp3
 
