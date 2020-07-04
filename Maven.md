@@ -23,6 +23,3 @@ directamente en la raíz del repositorio, `maven-repository`
 Se puede arrastrarlos directamente en la interfaz web si se hace: Add file -> Upload files
 
 O, más clásico, clonar el repositorio en la máquina local y hacer el típico `git add .` -> `git commit -m "..."` -> `git push`
-
-## Listado de programas
-### 
