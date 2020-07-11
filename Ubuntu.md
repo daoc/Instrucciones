@@ -1,6 +1,6 @@
 # Linux
 
-Estas instrucciones funcionan para Ubuntu 16.04
+Estas instrucciones funcionan para Ubuntu en general
 
 ## Reducir el tamaño de una partición lógica en LVM
 
@@ -64,30 +64,31 @@ Habilitar en arranque automàtico:
 
 Ref: http://www.linuxproblem.org/art_9.html
 
-First log in on A as user a and generate a pair of authentication keys. Do not enter a passphrase:
+Al trabajar en cluster muchos programas tienen que conectarse con otras máquinas por ssh para tareas de administración. Estas conexiones tienen que hacerse en modo no supervisado, es decir, sin la participación del usuario, lo que implica que no se puede pedir el password.
 
-a@A:~> `ssh-keygen -t rsa`
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/a/.ssh/id_rsa): 
-Created directory '/home/a/.ssh'.
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in /home/a/.ssh/id_rsa.
-Your public key has been saved in /home/a/.ssh/id_rsa.pub.
-The key fingerprint is:
-3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 a@A
+Para estos casos, lo mejor es utilizar clave pública-privada: se registra la clave pública del usuario local, en la máquina remota, y al conectarse por ssh el sistema ya no pedirá el password.
 
-Now use ssh to create a directory ~/.ssh as user b on B. (The directory may already exist, which is fine):
+Suponga entonces, que es el usuario *cerca*, en la máquina *local*, y que desea conectarse como el usuario *lejos*, en la máquina *remota*: cerca@local --> lejos@remota
 
-a@A:~> `ssh b@B mkdir -p .ssh`
-b@B's password: 
-Finally append a's new public key to b@B:.ssh/authorized_keys and enter b's password one last time:
+1) ingrese en *local* como *cerca*, y genere un par de claves, pero **sin password!**: cerca@local:~> `ssh-keygen -t rsa`
 
-a@A:~> `cat .ssh/id_rsa.pub | ssh b@B 'cat >> .ssh/authorized_keys'`
-b@B's password: 
-From now on you can log into B as b from A as a without password:
+Verá algo así:
+```
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/home/cerca/.ssh/id_rsa): 
+  Created directory '/home/a/.ssh'.
+  Enter passphrase (empty for no passphrase): 
+  Enter same passphrase again: 
+  Your identification has been saved in /home/cerca/.ssh/id_rsa.
+  Your public key has been saved in /home/cerca/.ssh/id_rsa.pub.
+  The key fingerprint is:
+  3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 a@A
+```
+2) Ahora, usando ssh, cree el directorio ~/.ssh, en la máquina *remota*, como el usuario *lejos*: cerca@local:~> `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe no pasa nada). En esta conexión todavía debe poner el password de *lejos*
 
-a@A:~> `ssh b@B`
+3) Finalmente, añada la clave pública de *cerca* en el archivo *authorized_keys*, del directorio */home/lejos/.ssh*, de la máquina *remota*. Por última vez deberá ingresar el password de *lejos@remota*: cerca@local:~> `cat .ssh/id_rsa.pub | ssh lejos@remota 'cat >> .ssh/authorized_keys'`
+
+4) Ahora ya podrá ingresar sin password a *remota*, como *lejos*: cerca@local:~> `ssh lejos@remota`
 
 ## Ejecutar comandos sudo sin poner password
 
