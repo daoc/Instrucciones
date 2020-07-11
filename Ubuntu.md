@@ -70,7 +70,7 @@ Para estos casos, lo mejor es utilizar clave pública-privada: se registra la cl
 
 Suponga entonces, que es el usuario *cerca*, en la máquina *local*, y que desea conectarse como el usuario *lejos*, en la máquina *remota*: cerca@local --> lejos@remota
 
-1) ingrese en *local* como *cerca*, y genere un par de claves, pero **sin password!**: cerca@local:~> `ssh-keygen -t rsa`
+1) ingrese en *local* como *cerca*, y genere un par de claves, pero **sin password!**: cerca@local:~$ `ssh-keygen -t rsa`
 
 Verá algo así:
 ```
@@ -82,13 +82,13 @@ Verá algo así:
   Your identification has been saved in /home/cerca/.ssh/id_rsa.
   Your public key has been saved in /home/cerca/.ssh/id_rsa.pub.
   The key fingerprint is:
-  3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 a@A
+  3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 cerca@local
 ```
-2) Ahora, usando ssh, cree el directorio ~/.ssh, en la máquina *remota*, como el usuario *lejos*: cerca@local:~> `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe no pasa nada). En esta conexión todavía debe poner el password de *lejos*
+2) Ahora, usando ssh, cree el directorio ~/.ssh, en la máquina *remota*, como el usuario *lejos*: cerca@local:~$ `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe, no hay problema). En esta conexión todavía debe poner el password de *lejos*
 
-3) Finalmente, añada la clave pública de *cerca* en el archivo *authorized_keys*, del directorio */home/lejos/.ssh*, de la máquina *remota*. Por última vez deberá ingresar el password de *lejos@remota*: cerca@local:~> `cat .ssh/id_rsa.pub | ssh lejos@remota 'cat >> .ssh/authorized_keys'`
+3) Finalmente, añada la clave pública de *cerca* en el archivo *authorized_keys*, del directorio */home/lejos/.ssh*, de la máquina *remota*. Por última vez deberá ingresar el password de *lejos@remota*: cerca@local:~$ `cat .ssh/id_rsa.pub | ssh lejos@remota 'cat >> .ssh/authorized_keys'`
 
-4) Ahora ya podrá ingresar sin password a *remota*, como *lejos*: cerca@local:~> `ssh lejos@remota`
+4) Ahora ya podrá ingresar sin password a *remota*, como *lejos*: cerca@local:~$ `ssh lejos@remota`
 
 ## Ejecutar comandos sudo sin poner password
 
