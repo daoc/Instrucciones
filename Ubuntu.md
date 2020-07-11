@@ -84,7 +84,7 @@ Verá algo así:
   The key fingerprint is:
   3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 cerca@local
 ```
-2) Ahora, usando ssh, cree el directorio ~/.ssh, en la máquina *remota*, como el usuario *lejos*: cerca@local:~$ `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe, no hay problema). En esta conexión todavía debe poner el password de *lejos*
+2) Ahora, usando ssh, cree el directorio */home/lejos/.ssh*, en la máquina *remota* (como el usuario *lejos*, claro): cerca@local:~$ `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe, no hay problema). En esta conexión todavía debe poner el password del usuario *lejos*
 
 3) Finalmente, añada la clave pública de *cerca* en el archivo *authorized_keys*, del directorio */home/lejos/.ssh*, de la máquina *remota*. Por última vez deberá ingresar el password de *lejos@remota*: cerca@local:~$ `cat .ssh/id_rsa.pub | ssh lejos@remota 'cat >> .ssh/authorized_keys'`
 
