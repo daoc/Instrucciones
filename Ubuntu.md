@@ -2,6 +2,18 @@
 
 Estas instrucciones funcionan para Ubuntu en general
 
+## Mantener la laptop funcionando al cerrar la tapa
+
+Abrir el archivo de configuración para editarlo:
+
+`$ sudo nano /etc/systemd/logind.conf`
+
+Buscar `HandleLidSwitch` y ponerlo, descomentado, así: `HandleLidSwitch=ignore`
+
+Reiniciar el servicio logind:
+
+`$ sudo service systemd-logind restart`
+
 ## Reducir el tamaño de una partición lógica en LVM
 
 Ref: https://askubuntu.com/questions/124465/how-do-i-shrink-the-root-logical-volume-lv-on-lvm
