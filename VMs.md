@@ -1,3 +1,15 @@
+# Proxmox: cambiar IP en clones (machine-id)
+
+Luego de clonar la VM y de haber cambiado el hostname (/etc/hostname), es necesario regenerar machine-id para tener una nueva IP:
+
+```
+$ sudo rm /etc/machine-id
+$ sudo dbus-uuidgen --ensure=/etc/machine-id
+$ sudo rm /var/lib/dbus/machine-id
+$ sudo dbus-uuidgen --ensure
+$ sudo reboot
+```
+
 # IP No cambia en clones o VMs importadas
 
 REF: https://superuser.com/questions/1470219/virtualbox-dhcp-server-is-leasing-the-same-ip-to-all-guest-vms-connected-to-a-v
