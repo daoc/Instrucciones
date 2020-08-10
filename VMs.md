@@ -1,6 +1,11 @@
-# Proxmox: cambiar IP en clones (machine-id)
+# Proxmox: clonar VM (para tener una nueva IP)
+Luego de haber clonado la VM es necesario:
 
-Luego de clonar la VM y de haber cambiado el hostname (/etc/hostname), es necesario regenerar machine-id para tener una nueva IP:
+- cambiar nombre en /etc/hostname
+ 
+`$ sudo nano /etc/hostname`
+
+- regenerar machine-id
 
 ```
 $ sudo rm /etc/machine-id
@@ -10,19 +15,11 @@ $ sudo dbus-uuidgen --ensure
 $ sudo reboot
 ```
 
-# IP No cambia en clones o VMs importadas
+# VirtualBox: clonar VM (para tener una nueva IP)
 
 REF: https://superuser.com/questions/1470219/virtualbox-dhcp-server-is-leasing-the-same-ip-to-all-guest-vms-connected-to-a-v
 
-Remove /etc/machine-id and /var/lib/dbus/machine-id
-
-Create an empty /etc/machine-id
-
-Give /etc/machine-id proper permissions (this does not seem to be strictly necessary but that's how it was initially)
-
-Shutdown the machine and never start it again or you will have to redo the steps above!
-
-Or in code:
+Esto es necesario hacer antes de clonar la máquina original:
 
 ```
 sudo rm /etc/machine-id /var/lib/dbus/machine-id
@@ -30,8 +27,9 @@ sudo touch /etc/machine-id
 sudo chmod 444 /etc/machine-id
 sudo shutdown -h now
 ```
+Ahora, no vuelva a abrir la máquina y clónela directamente (si la vuelve a abrir se regenera machine-id y hay que repetir esto)
 
-Now the base-machine can safely be cloned, and each new machine will generate its own unique machine-id on first boot.
+Los nuevos clones regenerarán machine-id con un dato diferente.
 
 # Con Multipass no se genera una red interna (Win 10 Home)
 
