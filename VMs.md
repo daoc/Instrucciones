@@ -5,6 +5,10 @@ Luego de haber clonado la VM es necesario:
  
 `$ sudo nano /etc/hostname`
 
+- cambiar nombre en /etc/hosts
+ 
+`$ sudo nano /etc/hosts` (se encuentra junto a 127.0.1.1)
+
 - regenerar machine-id
 
 ```
