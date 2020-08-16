@@ -35,6 +35,50 @@ Ahora, no vuelva a abrir la máquina y clónela directamente (si la vuelve a abr
 
 Los nuevos clones regenerarán machine-id con un dato diferente.
 
+# KVM Crear bridge network
+
+Esto permite que las VM puedan ser accedidas desde otras máquinas en la red (menos el host, para eso ver siguiente punto)
+
+Instalar: `sudo apt-get install bridge-utils`
+
+Editar: `sudo nano /etc/network/interfaces` y añadir:
+```
+auto br0
+
+iface br0 inet dhcp
+    bridge_ports enp0s3
+```
+(verificar el nombre de la interfaz host externa. En este caso es enp0s3)
+
+Reiniciar el host: `sudo reboot`
+
+Añadir a VirtManager para que esté disponible en las nuevas VM que se creen
+
+Cree un archivo bridge.xml en el home del host:
+
+```
+:$ cd
+:$ nano bridge.xml
+```
+Añada:
+
+```
+<network>
+  <name>bridge</name>
+  <forward mode="bridge"/>
+  <bridge name="br0"/>
+</network>
+```
+Active y verifique:
+
+```
+:$ virsh net-define bridge.xml
+:$ virsh net-autostart bridge
+:$ virsh net-start bridge
+:$ virsh net-list --all
+```
+
+
 # Con Multipass no se genera una red interna (Win 10 Home)
 
 En Ubuntu todo funciona bien automáticamente. Parece que el problema es solo cuando hay que usar VirtualBox, lo cual es necesario en Win 10 Home.
