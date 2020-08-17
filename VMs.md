@@ -78,6 +78,65 @@ Active y verifique:
 :$ virsh net-list --all
 ```
 
+# KVM Crear host-guest network
+
+Si utilizó una red bridge (punto anterior) no podrá comunicar entre host y guest. En ese caso debe crear una red exclusiva entre ellos.
+
+Cree un archivo host_guest.xml en el home del host:
+
+```
+:$ cd
+:$ nano host_guest.xml
+```
+Añada:
+
+```
+<network>
+  <name>host_guest</name>
+  <ip address='192.168.254.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.254.2' end='192.168.254.254' />
+    </dhcp>
+  </ip>
+</network>
+```
+Active y verifique:
+
+```
+:$ virsh net-define host_guest.xml
+:$ virsh net-autostart host_guest
+:$ virsh net-start host_guest
+:$ virsh net-list --all
+```
+Si la VM ya fue creada, debe añadirle esta red. Use el comando `:$ virsh edit nombre_de_VM` y añada, en la sección <devices>:
+```
+ <interface type='network'>
+  <source network='host_guest'/>
+  <model type='virtio'/>
+</interface>
+```
+Resetee la VM.
+ 
+Edite: `sudo nano /etc/netplan/00-installer-config.yaml` (el nombre del archivo podría ser un poco diferente, en el número inicial)
+
+Añada en la sección ethernets:
+```
+    enp6s0:
+      dhcp4: true
+```
+Debería quedar algo así:
+```
+network:
+  ethernets:
+    enp1s0:
+      dhcp4: true
+    enp6s0:
+      dhcp4: true
+  version: 2
+```
+(si no está seguro del nombre de la interfaz, verifique con: `ifconfig -a`
+
+Active: `sudo netplan apply`
 
 # Con Multipass no se genera una red interna (Win 10 Home)
 
