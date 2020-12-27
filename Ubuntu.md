@@ -128,7 +128,7 @@ Modificar en el archivo de configuración de dsh que puede estar en: "/usr/local
 remoteshell =ssh  
 showmachinenames = 1
 ```
-Incluir los nombres de todas las máquinas en el archivo de dsh ~/.dsh/machines.list (puede estar en otro directorio), ej:
+Incluir los nombres de todas las máquinas en el archivo de dsh "~/.dsh/machines.list" o "/etc/dsh/machines.list" (puede estar en otro directorio!), ej:
 ```
 rpi0.local
 rpi1.local
