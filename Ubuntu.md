@@ -123,7 +123,7 @@ Instalar dsh:
 
 `sudo apt install dsh`
 
-Modificar en el archivo de configuración de dsh "/usr/local/etc/dsh.conf" (puede estar en otro directorio!)
+Modificar en el archivo de configuración de dsh que puede estar en: "/usr/local/etc/dsh.conf" o "/etc/dsh/dsh.conf" (puede estar en otro directorio!)
 ```
 remoteshell =ssh  
 showmachinenames = 1
