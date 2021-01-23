@@ -96,11 +96,19 @@ Verá algo así:
   The key fingerprint is:
   3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 cerca@local
 ```
-2) Ahora, usando ssh, cree el directorio */home/lejos/.ssh*, en la máquina *remota* (como el usuario *lejos*, claro): cerca@local:~$ `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe, no hay problema). En esta conexión todavía debe poner el password del usuario *lejos*
+2) La forma más sencilla es usando: `ssh-copy-id`. Este script copia la clave pública del usuario actual (cerca) desde la máquina en la que se encuentra (local), hacia el usuario y máquina que usted elija, en el caso de este ejemplos hacia el usuario lejos en la máquina remota:
 
-3) Finalmente, añada la clave pública de *cerca* en el archivo *authorized_keys*, del directorio */home/lejos/.ssh*, de la máquina *remota*. Por última vez deberá ingresar el password de *lejos@remota*: cerca@local:~$ `cat .ssh/id_rsa.pub | ssh lejos@remota 'cat >> .ssh/authorized_keys'`
+`ssh-copy-id lejos@remota`
 
-4) Ahora ya podrá ingresar sin password a *remota*, como *lejos*: cerca@local:~$ `ssh lejos@remota`
+El sistema le pedirá la clave de lejos en remota para completar la operación. Luego podrá ingresar a remota, como el usuario lejos, sin poner clave: cerca@local:~$ `ssh lejos@remota`
+
+Si por alguna razón no tiene el script ssh-copy-id, deberá ejecutar los siguientes pasos:
+
+3) Usando ssh, cree el directorio */home/lejos/.ssh*, en la máquina *remota* (como el usuario *lejos*, claro): cerca@local:~$ `ssh lejos@remota mkdir -p .ssh` (si el directorio ya existe, no hay problema). En esta conexión todavía debe poner el password del usuario *lejos*
+
+4) Finalmente, añada la clave pública de *cerca* en el archivo *authorized_keys*, del directorio */home/lejos/.ssh*, de la máquina *remota*. Por última vez deberá ingresar el password de *lejos@remota*: cerca@local:~$ `cat .ssh/id_rsa.pub | ssh lejos@remota 'cat >> .ssh/authorized_keys'`
+
+5) Ahora ya podrá ingresar sin password a *remota*, como *lejos*: cerca@local:~$ `ssh lejos@remota`
 
 ## Ejecutar comandos sudo sin poner password
 
