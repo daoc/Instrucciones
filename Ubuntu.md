@@ -2,6 +2,16 @@
 
 Estas instrucciones funcionan para Ubuntu en general
 
+## HTTPS en Ubuntu 18
+
+Para un certificado autogenerado:
+Revise: https://hostadvice.com/how-to/configure-apache-with-tls-ssl-certificate-on-ubuntu-18/
+
+Para tener un certificado emitido por una autoridad verdadera puede:
+- Obtenga un dominio en Freenom
+- Obtenga el certificado con Let's Encrypt
+- Y si no pudo registrarlo automáticamente en su server, configure con las instrucciones para el autogenerado
+
 ## Mantener la laptop funcionando al cerrar la tapa
 
 Abrir el archivo de configuración para editarlo:
