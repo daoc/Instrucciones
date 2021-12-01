@@ -2,6 +2,12 @@
 
 Estas instrucciones funcionan para Ubuntu en general
 
+## Cambiar hostname permanentemente
+
+- Edite el archivo */etc/hostname* `sudo nano /etc/hostname`, ponga el nuevo nombre, grabe con `Ctrl+o` y cierre con `Ctrl+x`
+- Edite el archivo */etc/hosts* `sudo nano /etc/hosts`, cambie el nombre en la segunda línea (como lo hizo en la isntrucción anterior), grabe con `Ctrl+o` y cierre con `Ctrl+x`
+- Resetee `sudo reboot`
+
 ## HTTPS en Ubuntu 18
 
 Para un certificado autogenerado:
