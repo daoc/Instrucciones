@@ -8,6 +8,13 @@ Estas instrucciones funcionan para Ubuntu en general
 - Edite el archivo */etc/hosts* `sudo nano /etc/hosts`, cambie el nombre en la segunda línea (como lo hizo en la isntrucción anterior), grabe con `Ctrl+o` y cierre con `Ctrl+x`
 - Resetee `sudo reboot`
 
+## Renovar IP
+
+- Verifique el nombre de la interfaz sobre la cual desea renovar la IP con `ifconfig`
+- Suponiendo que la interfaz de interés es, por ejemplo: `enp0s8`
+  - Libere la IP con: `sudo dhclient -v -r enp0s8`
+  - Obtenga nueva IP con: `sudo dhclient -v enp0s8`
+
 ## HTTPS en Ubuntu 18
 
 Para un certificado autogenerado:
