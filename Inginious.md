@@ -68,7 +68,7 @@ El último comando desencadena la utilidad de configuración. Se debe seguir el 
 
 > Cuando se solicite indicar directorios, es necesario poner el path absoluto de los mismos
 
-Entre otras cosas, esto genera el archivo `/var/www/html/inginious/comfiguration.yaml`, con el contenido (que variará dependiendo de lo que se responda):
+Entre otras cosas, esto genera el archivo `/var/www/html/inginious/configuration.yaml`, con el contenido (que variará dependiendo de lo que se responda):
 
 ```yaml
 backend: local
@@ -110,7 +110,7 @@ INGINIOUS_WEBAPP_PORT="80"
 EOF
 ```
 
-Añadir al final de `/var/www/html/inginious/comfiguration.yaml`:
+Añadir al final de `/var/www/html/inginious/configuration.yaml`:
 
 ```yaml
 local-config:
