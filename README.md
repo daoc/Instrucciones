@@ -23,4 +23,4 @@ Instrucciones varias para manejo de sistemas
 
 ### [Vonets-Vap11g](Vonets-Vap11g.md)
 
-### [Inginious](Ingonious.md)
+### [Inginious](Inginious.md)
