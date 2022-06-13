@@ -155,6 +155,8 @@ Crear el archivo `/etc/httpd/conf.d/inginious.conf` con la siguiente configuraci
 </VirtualHost>
 ```
 
+> **IMPORTANTE:** para que WebDav funcione es muy probable que se deba verificar en el archivo `/etc/httpd/conf/httpd.conf`, que el servidor escuche en el puerto 8080, ya que normalmente estará escuchando solo en el 80. Para esto añada `Listen 8080` bajo `Listen 80`. 
+
 Finalmente reiniciar Apache
 
 ```bash
